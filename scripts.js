@@ -9,6 +9,7 @@ const amount = document.getElementById("amount");
 const currency = document.getElementById("currency");
 const footer = document.querySelector("main footer");
 const description = document.getElementById("description");
+const result = document.getElementById("result");
 
 // Manipulando o input amount para receber somente números.
 amount.addEventListener("input", () => {
@@ -23,13 +24,13 @@ form.onsubmit = (event) => {
 
   switch (currency.value) {
     case "USD":
-      convertCurrency(currency.value, USD, "US$");
+      convertCurrency(amount.value, USD, "US$");
       break;
     case "EUR":
-      convertCurrency(currency.value, EUR, "€");
+      convertCurrency(amount.value, EUR, "€");
       break;
     case "GBP":
-      convertCurrency(currency.value, GBP, "£");
+      convertCurrency(amount.value, GBP, "£");
       break;
 
     default:
@@ -42,6 +43,12 @@ function convertCurrency(amount, price, symbol) {
   try {
     // Exibindo a cotação da moeda selecionada.
     description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
+
+    // Calcula o total.
+    let total = amount * price;
+
+    // Exibe o resultado total.
+    result.textContent = total;
 
     // Aplica a classe que exibe o footer para mostrar o resultado.
     footer.classList.add("show-result");
